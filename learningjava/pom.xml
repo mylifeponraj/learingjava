@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.learn</groupId>
+  <artifactId>learningjava</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+    <module>commons-annotation</module>
+  </modules>
+  <name>learningjava</name>
+
+  <properties>
+    <apache.maven.version>3.8.1</apache.maven.version>
+    <java.version>22</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <maven.compiler.release>${java.version}</maven.compiler.release>
+    <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+    <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+    <maven.compiler.debug>true</maven.compiler.debug>
+    <maven.compiler.debuglevel>lines,vars,source</maven.compiler.debuglevel>
+    <maven.compiler.optimize>true</maven.compiler.optimize>
+    <maven.compiler.debugsource>true</maven.compiler.debugsource>
+    <maven.compiler.debugtarget>true</maven.compiler.debugtarget>
+    <maven.compiler.fork>true</maven.compiler.fork>
+    <maven.compiler.forkmode>once</maven.compiler.forkmode>
+    <maven.compiler.failonerror>true</maven.compiler.failonerror>
+    <maven.compiler.check>true</maven.compiler.check>
+    <maven.compiler.failonwarning>true</maven.compiler.failonwarning>
+    <maven.compiler.useIncrementalCompilation>true</maven.compiler.useIncrementalCompilation>
+    <maven.compiler.incremental>true</maven.compiler.incremental>
+    <maven.compiler.forceJavacCompilerUse>true</maven.compiler.forceJavacCompilerUse>
+
+
+    <junit.version>4.13.2</junit.version>
+    <logback.version>1.5.6</logback.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <build>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>${apache.maven.version}</version>
+          </dependency>
+        </dependencies>
+      </build>
+    </profile>
+
+    <profile>
+      <id>prod</id>
+      <build>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>${apache.maven.version}</version>
+          </dependency>
+        </dependencies>
+      </build>
+    </profile>
+
+  </profiles>
+</project>
