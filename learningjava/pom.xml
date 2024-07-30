@@ -7,6 +7,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>commons-annotation</module>
+    <module>testmodules</module>
   </modules>
   <name>learningjava</name>
 
@@ -18,7 +19,7 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.compiler.release>${java.version}</maven.compiler.release>
-    <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+    <!-- <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
     <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
     <maven.compiler.debug>true</maven.compiler.debug>
     <maven.compiler.debuglevel>lines,vars,source</maven.compiler.debuglevel>
@@ -32,7 +33,7 @@
     <maven.compiler.failonwarning>true</maven.compiler.failonwarning>
     <maven.compiler.useIncrementalCompilation>true</maven.compiler.useIncrementalCompilation>
     <maven.compiler.incremental>true</maven.compiler.incremental>
-    <maven.compiler.forceJavacCompilerUse>true</maven.compiler.forceJavacCompilerUse>
+    <maven.compiler.forceJavacCompilerUse>true</maven.compiler.forceJavacCompilerUse> -->
 
 
     <junit.version>4.13.2</junit.version>
@@ -54,30 +55,73 @@
 
   </dependencies>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${apache.maven.version}</version>
+        <configuration>
+          <compilerArgs>
+            <arg>--enable-preview</arg>
+            <arg>-Xlint:preview</arg>
+          </compilerArgs>
+
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+          <generatedSourcesDirectory>${project.build.directory}/generated-sources/</generatedSourcesDirectory>
+          <forceJavacCompilerUse>true</forceJavacCompilerUse>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
   <profiles>
     <profile>
       <id>dev</id>
       <build>
-        <dependencies>
-          <dependency>
+        <plugins>
+          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <version>${apache.maven.version}</version>
-          </dependency>
-        </dependencies>
+            <configuration>
+              <compilerArgs>
+                <arg>--enable-preview</arg>
+                <arg>-Xlint:preview</arg>
+              </compilerArgs>
+
+              <source>${java.version}</source>
+              <target>${java.version}</target>
+              <encoding>${project.build.sourceEncoding}</encoding>
+              <generatedSourcesDirectory>${project.build.directory}/generated-sources/</generatedSourcesDirectory>
+            </configuration>
+          </plugin>
+        </plugins>
       </build>
     </profile>
 
     <profile>
       <id>prod</id>
       <build>
-        <dependencies>
-          <dependency>
+        <plugins>
+          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <version>${apache.maven.version}</version>
-          </dependency>
-        </dependencies>
+            <configuration>
+              <compilerArgs>
+                <arg>--enable-preview</arg>
+                <arg>-Xlint:preview</arg>
+              </compilerArgs>
+
+              <source>${java.version}</source>
+              <target>${java.version}</target>
+              <encoding>${project.build.sourceEncoding}</encoding>
+              <generatedSourcesDirectory>${project.build.directory}/generated-sources/</generatedSourcesDirectory>
+            </configuration>
+          </plugin>
+        </plugins>
       </build>
     </profile>
 

@@ -18,26 +18,20 @@ import javax.lang.model.util.Types;
 
 import com.google.auto.service.AutoService;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @AutoService(Processor.class)
 @SupportedAnnotationTypes("com.generic.annotation.Overload")
 @SupportedSourceVersion(SourceVersion.RELEASE_22)
 public class GenericAnnotationProcessor extends AbstractProcessor{
 
-    @Override
-    public Set<String> getSupportedAnnotationTypes() {
+    @Override public Set<String> getSupportedAnnotationTypes() {
         return super.getSupportedAnnotationTypes();
     }
 
-    @Override
-    public SourceVersion getSupportedSourceVersion() {
+    @Override public SourceVersion getSupportedSourceVersion() {
         return super.getSupportedSourceVersion();
     }
 
-    @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
+    @Override public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
 
         //Important Utility Objects
@@ -46,14 +40,15 @@ public class GenericAnnotationProcessor extends AbstractProcessor{
         options = processingEnv.getOptions();
         elements = processingEnv.getElementUtils();
         types = processingEnv.getTypeUtils();
-        
-        log.debug("Generic Annotation Processor Initialized");
     }
-
+    
     @Override public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        
+        GenericAnnotation genericOverloadAnnotation = new OverloadAnnotation();
+        genericOverloadAnnotation.process(roundEnv, types, elements, filler, messager, annotations, processingEnv);
 
-        GenericAnnotation genericAnnotation = new OverloadAnnotation();
-        genericAnnotation.process(roundEnv, types, elements, filler, messager, annotations, processingEnv);
+        GenericAnnotation genericComparableAnnotation = new ComparableDataAnnotation();
+        genericComparableAnnotation.process(roundEnv, types, elements, filler, messager, annotations, processingEnv);
         
         return Boolean.FALSE;
     }
